@@ -55,7 +55,7 @@ class ImageGalleryField extends Trix
      * @param  string  $requestAttribute
      * @param  Model  $model
      * @param  string  $attribute
-     * @return mixed
+     * @return void
      */
     protected function fillAttribute(NovaRequest $request, $requestAttribute, $model, $attribute)
     {
