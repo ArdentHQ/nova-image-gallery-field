@@ -1,0 +1,8 @@
+parameters:
+    paths:
+        - ./src
+    level: 8
+    ignoreErrors:
+        - '#Call to an undefined static method ([\w\\\:_\(\)]+)::([\w\\\:_\(\)]+)\(\)#'
+    checkMissingIterableValueType: false
+    reportUnmatchedIgnoredErrors: false

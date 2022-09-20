@@ -1,0 +1,66 @@
+{
+    "name": "ardenthq/nova-image-gallery-field",
+    "description": "Field for Nova that allows you to upload multiple images and sort them",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alfonso",
+            "email": "alfonso@ardenthq.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "^9.30",
+        "laravel/nova": "^4.0",
+        "spatie/laravel-medialibrary": "^10.0.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.10",
+        "orchestra/testbench": "^7.7",
+        "pestphp/pest": "^1.21",
+        "phpstan/phpstan": "^1.8",
+        "rector/rector": "^0.14"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    ],
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Ardenthq\\ImageGalleryField\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ardenthq\\ImageGalleryField\\FieldServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "analyse": "./vendor/bin/phpstan analyse",
+        "refactor": "./vendor/bin/rector process",
+        "format": "./vendor/bin/php-cs-fixer fix",
+        "test": "./vendor/bin/pest",
+        "test:fast": "./vendor/bin/pest --parallel",
+        "test:coverage": "./vendor/bin/pest --coverage --min=100 --coverage-html=.coverage --coverage-clover=coverage.xml"
+    }
+}

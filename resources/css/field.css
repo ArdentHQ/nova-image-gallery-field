@@ -1,0 +1,6 @@
+@tailwind components;
+@tailwind utilities;
+
+.animation-spin {
+    animation: spin 1s infinite linear;
+}

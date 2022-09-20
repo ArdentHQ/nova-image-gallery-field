@@ -1,0 +1,37 @@
+name: Format
+
+on:
+    pull_request:
+        paths:
+            - "**.php"
+
+jobs:
+    php-cs-fixer:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  ref: ${{ github.head_ref }}
+                  token: ${{ secrets.GH_TOKEN }}
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: "8.1"
+                  extensions: mbstring, dom, fileinfo, intl, gd, imagick, bcmath, soap, zip, sqlite, pcov
+                  coverage: pcov
+
+            - name: Authenticate Nova
+              run: composer config http-basic.nova.laravel.com ${{ secrets.NOVA_USERNAME }} ${{ secrets.NOVA_LICENSE_KEY }}
+
+            - name: Install
+              run: composer install --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader --ignore-platform-reqs
+
+            - name: Run php-cs-fixer
+              run: PHP_CS_FIXER_IGNORE_ENV=true composer format
+
+            - uses: stefanzweifel/git-auto-commit-action@v4
+              with:
+                  commit_message: "style: resolve style guide violations"
+                  branch: ${{ github.head_ref }}
