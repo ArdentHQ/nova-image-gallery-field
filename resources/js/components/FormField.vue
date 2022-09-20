@@ -150,12 +150,16 @@ export default {
                         `${this.field.attribute}_delete[]`,
                         file.id
                     );
-                } else if (file.new) {
+                } else if (file.new && !file.error) {
                     formData.append(`${this.field.attribute}[]`, file.id);
                 }
             });
 
             this.validImages.forEach((image) => {
+                if (image.error) {
+                    return;
+                }
+
                 if (image.new) {
                     formData.append(
                         `${this.field.attribute}_order[]`,
@@ -198,9 +202,9 @@ export default {
                         data
                     );
 
-                    // Its counterintuitive but `response.data.url` contains an
-                    // string with the media id and the url separated by a colon.
-                    const [id, url] = response.data.url.split(":");
+                    // Its counterintuitive but `response.data.url` contains a
+                    // JSON string with the url and the media id.
+                    const { url, id } = JSON.parse(response.data.url);
 
                     const valueIndex = this.value.findIndex(
                         (v) => v.id === fileId

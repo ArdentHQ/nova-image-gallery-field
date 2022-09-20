@@ -57,7 +57,11 @@ class StorePendingImage extends TrixStorePendingAttachment
         /** @var FilesystemAdapter $storage */
         $storage = Storage::disk($disk);
         $url     = $storage->url($attachment->attachment);
+
         // We need to return a string to make it compatible with the parent class
-        return sprintf('%s:%s', $attachment->id, $url);
+        return json_encode([
+            'url' => $url,
+            'id' => $attachment->id,
+        ]);
     }
 }
