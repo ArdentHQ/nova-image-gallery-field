@@ -15,17 +15,12 @@ class StorePendingImage
 {
     use ValidatesRequests;
 
-    /**
-     * The field instance.
-     *
-     * @var ImageGalleryField
-     */
-    public $field;
-
-
-    public function __construct(ImageGalleryField $field)
-    {
-        $this->field = $field;
+    public function __construct(
+        /**
+         * The field instance.
+         */
+        public ImageGalleryField $field
+    ) {
     }
 
     /**
@@ -39,10 +34,10 @@ class StorePendingImage
         $this->validate(
             $request,
             [
-                'attachment' => [...$this->field->rules, 'required'],
+                'attachment' => [...$this->field->imageRules, 'required'],
                 'draftId'    => 'required',
             ],
-            $this->field->rulesMessages
+            $this->field->imageRulesMessages
         );
 
         /** @var UploadedFile $file */
@@ -70,7 +65,7 @@ class StorePendingImage
         /** @var string $result */
         $result = json_encode([
             'url' => $url,
-            'id' => $attachment->id,
+            'id'  => $attachment->id,
         ]);
 
         return $result;

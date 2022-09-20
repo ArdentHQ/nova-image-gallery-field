@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ardenthq\ImageGalleryField;
 
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +27,14 @@ class ImageGalleryField extends Trix
 
     public $showOnIndex = false;
 
-    public array $rulesMessages = [];
+    public array $imageRulesMessages = [];
+
+    /**
+     * The validation rules for creation and updates.
+     *
+     * @var array<int, (string | \Illuminate\Validation\Rule | Rule | callable)>|mixed
+     */
+    public $imageRules = [];
 
     /**
      * Create a new field.
@@ -52,6 +60,32 @@ class ImageGalleryField extends Trix
     }
 
     /**
+     * Set custom error messages for the validation rules.
+     *
+     * @param  array<string, string>  $messages
+     * @return $this
+     */
+    public function rulesMessages(array $messages) : self
+    {
+        $this->imageRulesMessages = $messages;
+
+        return $this;
+    }
+
+    /**
+     * Set the validation rules for the field.
+     *
+     * @param callable|array<int, (string | \Illuminate\Validation\Rule | Rule | callable)>|string ...$rules
+     * @return $this
+     */
+    public function rules($rules)
+    {
+        $this->imageRules = ($rules instanceof Rule || is_string($rules)) ? func_get_args() : $rules;
+
+        return $this;
+    }
+
+    /**
      * Hydrate the given attribute on the model based on the incoming request.
      *
      * @param  string  $requestAttribute
@@ -61,6 +95,7 @@ class ImageGalleryField extends Trix
      */
     protected function fillAttribute(NovaRequest $request, $requestAttribute, $model, $attribute)
     {
+        info(':D');
         $model::saved(function ($model) use ($request, $attribute) {
             /** @var UploadedFile[] $newImages */
             $newImages      = $request->get($attribute);
@@ -110,17 +145,4 @@ class ImageGalleryField extends Trix
            ];
        });
    }
-
-    /**
-     * Set custom error messages for the validation rules.
-     *
-     * @param  array<string, string>  $messages
-     * @return $this
-     */
-    public function rulesMessages(array $messages) : self
-    {
-        $this->rulesMessages = $messages;
-
-        return $this;
-    }
 }
