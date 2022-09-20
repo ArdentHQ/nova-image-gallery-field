@@ -43,15 +43,13 @@ $schedule->call(function () {
 
 3. Add the `ImageGalleryField` field to your Nova Resource.
 
-4. You can optionally add the field inside a `Laravel\Nova\Panel` to make it look better.
+4. Consider that the images will be stored in a `Spatie\MediaLibrary\MediaCollections\Models\Media` collection according to the name passed as the first parameter on the field `make` method or the second parameter if set.
 
-5. Consider that the images will be stored in a `Spatie\MediaLibrary\MediaCollections\Models\Media` collection according to the name passed as the first parameter on the field `make` method or the second parameter if set.
+5. Use the `rules()` method to define the rules used for every single image.
 
-6. Use the `rules()` method to define the rules used for every single image.
+6. Use the `rulesMessages()` method to define custom validation messages for the image rules.
 
-7. Use the `rulesMessages()` method to define custom validation messages for the image rules.
-
-8. Use the `help()` method if you want to place "help" text inside the Drag & Drop area.
+7. Use the `help()` method if you want  to place "help" text inside the Drag & Drop area.
 
 ### Example
 
@@ -62,7 +60,6 @@ namespace App\Nova;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource;
 use Ardenthq\ImageGalleryField\ImageGalleryField;
-use Laravel\Nova\Panel;
 
 final class ResourceName extends Resource
 {
@@ -71,16 +68,14 @@ final class ResourceName extends Resource
     {
         return [
             // ....
-            new Panel('Images', [
-                ImageGalleryField::make('Images')
-                    ->rules('mimes:jpeg,png,jpg,gif', 'dimensions:min_width=150,min_height=150', 'max:5000')
-                    ->rulesMessages([
-                        'mimes'      => 'You must use a valid jpeg, png, jpg or gif image.',
-                        'max'        => 'The image must be less than 5MB.',
-                        'dimensions' => 'The image must be at least 150px wide and 150px tall.',
-                    ])
-                    ->help('Min size 150 x 150. Max filesize 5MB.'),
-            ]),
+            ImageGalleryField::make('Images')
+                ->rules('mimes:jpeg,png,jpg,gif', 'dimensions:min_width=150,min_height=150', 'max:5000')
+                ->rulesMessages([
+                    'mimes'      => 'You must use a valid jpeg, png, jpg or gif image.',
+                    'max'        => 'The image must be less than 5MB.',
+                    'dimensions' => 'The image must be at least 150px wide and 150px tall.',
+                ])
+                ->help('Min size 150 x 150. Max filesize 5MB.'),
                 // ...
         ];
     }
