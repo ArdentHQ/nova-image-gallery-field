@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
+use Ardenthq\ImageGalleryField\ImageGalleryField;
+use Ardenthq\ImageGalleryField\StorePendingImage;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Laravel\Nova\Trix\PendingAttachment;
 use Illuminate\Validation\ValidationException;
-use Ardenthq\ImageGalleryField\ImageGalleryField;
-use Ardenthq\ImageGalleryField\StorePendingImage;
+use Laravel\Nova\Trix\PendingAttachment;
 
 function createRequestWithFile(UploadedFile $file, array $parameters = [])
 {
@@ -19,7 +19,6 @@ function createRequestWithFile(UploadedFile $file, array $parameters = [])
         }
     };
 }
-
 
 it('creates an instance', function () {
     $field = new ImageGalleryField('content');

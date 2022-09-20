@@ -6,7 +6,6 @@ namespace Ardenthq\ImageGalleryField;
 
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Fields\Trix;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -88,16 +87,15 @@ class ImageGalleryField extends Trix
     /**
      * Hydrate the given attribute on the model based on the incoming request.
      *
-     * @param  string  $requestAttribute
      * @param  Model  $model
      * @param  string  $attribute
-     * @return void
+     * @param  string|null  $requestAttribute
+     * @return mixed
      */
-    protected function fillAttribute(NovaRequest $request, $requestAttribute, $model, $attribute)
+    public function fillInto(NovaRequest $request, $model, $attribute, $requestAttribute = null)
     {
-        info(':D');
         $model::saved(function ($model) use ($request, $attribute) {
-            /** @var UploadedFile[] $newImages */
+            /** @var string[] $newImages */
             $newImages      = $request->get($attribute);
             /** @var (mixed)[] $imagesToDelete */
             $imagesToDelete = $request->get($attribute.'_delete', []);
