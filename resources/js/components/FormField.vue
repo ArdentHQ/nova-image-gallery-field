@@ -60,10 +60,9 @@
 
                             <div
                                 class="flex flex-col space-y-1 text-xs font-semibold text-center sm:flex-row sm:space-y-0 sm:space-x-1 text-gray-500 chunk-header"
+                                v-if="field.helpText"
                             >
-                                <span
-                                    >Min size 150 x 150. Max filesize 5MB.</span
-                                >
+                                <span>{{ field.helpText }}</span>
                             </div>
                         </div>
 

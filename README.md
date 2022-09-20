@@ -51,6 +51,10 @@ $schedule->call(function () {
 
 7. Use the `rulesMessages()` method to define custom validation messages for the image rules.
 
+8. Use the `help()` method if you want to place "help" text inside the Drag & Drop area.
+
+### Example
+
 ```php
 <?php
 namespace App\Nova;
@@ -74,7 +78,8 @@ final class ResourceName extends Resource
                         'mimes'      => 'You must use a valid jpeg, png, jpg or gif image.',
                         'max'        => 'The image must be less than 5MB.',
                         'dimensions' => 'The image must be at least 150px wide and 150px tall.',
-                    ]),
+                    ])
+                    ->help('Min size 150 x 150. Max filesize 5MB.'),
             ]),
                 // ...
         ];
