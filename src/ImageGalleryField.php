@@ -26,6 +26,8 @@ class ImageGalleryField extends Trix
 
     public $showOnIndex = false;
 
+    public array $rulesMessages = [];
+
     /**
      * Create a new field.
      *
@@ -108,4 +110,17 @@ class ImageGalleryField extends Trix
            ];
        });
    }
+
+    /**
+     * Set custom error messages for the validation rules.
+     *
+     * @param  array<string, string>  $messages
+     * @return $this
+     */
+    public function rulesMessages(array $messages) : self
+    {
+        $this->rulesMessages = $messages;
+
+        return $this;
+    }
 }

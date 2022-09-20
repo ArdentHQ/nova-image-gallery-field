@@ -10,11 +10,23 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Trix\PendingAttachment;
-use Laravel\Nova\Trix\StorePendingAttachment as TrixStorePendingAttachment;
 
-class StorePendingImage extends TrixStorePendingAttachment
+class StorePendingImage
 {
     use ValidatesRequests;
+
+    /**
+     * The field instance.
+     *
+     * @var ImageGalleryField
+     */
+    public $field;
+
+
+    public function __construct(ImageGalleryField $field)
+    {
+        $this->field = $field;
+    }
 
     /**
      * Attach a pending attachment to the field.
@@ -27,14 +39,10 @@ class StorePendingImage extends TrixStorePendingAttachment
         $this->validate(
             $request,
             [
-                'attachment' => 'mimes:jpeg,png,jpg,gif|required|dimensions:min_width=150,min_height=150|max:5000',
+                'attachment' => [...$this->field->rules, 'required'],
                 'draftId'    => 'required',
             ],
-            [
-                'mimes'      => 'You must use a valid jpeg, png, jpg or gif image.',
-                'max'        => 'The image must be less than 5MB.',
-                'dimensions' => 'The image must be at least 150px wide and 150px tall.',
-            ]
+            $this->field->rulesMessages
         );
 
         /** @var UploadedFile $file */

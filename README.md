@@ -47,6 +47,10 @@ $schedule->call(function () {
 
 5. Consider that the images will be stored in a `Spatie\MediaLibrary\MediaCollections\Models\Media` collection according to the name passed as the first parameter on the field `make` method or the second parameter if set.
 
+6. Use the `rules()` method to define the rules used for every single image.
+
+7. Use the `rulesMessages()` method to define custom validation messages for the image rules.
+
 ```php
 <?php
 namespace App\Nova;
@@ -64,7 +68,13 @@ final class ResourceName extends Resource
         return [
             // ....
             new Panel('Images', [
-                ImageGalleryField::make('Images'),
+                ImageGalleryField::make('Images')
+                    ->rules('mimes:jpeg,png,jpg,gif', 'dimensions:min_width=150,min_height=150', 'max:5000')
+                    ->rulesMessages([
+                        'mimes'      => 'You must use a valid jpeg, png, jpg or gif image.',
+                        'max'        => 'The image must be less than 5MB.',
+                        'dimensions' => 'The image must be at least 150px wide and 150px tall.',
+                    ]),
             ]),
                 // ...
         ];
