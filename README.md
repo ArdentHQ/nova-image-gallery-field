@@ -6,9 +6,7 @@
 
 > A custom Nova field that allows multiple image upload with sorting
 
-[![Build Status](https://badgen.now.sh/github/status/ArdentHQ/nova-image-gallery-field/main)](https://github.com/ArdentHQ/nova-image-gallery-field/actions?query=branch%main)
-[![Codecov](https://badgen.now.sh/codecov/c/github/ArdentHQ/nova-image-gallery-field)](https://codecov.io/gh/ArdentHQ/nova-image-gallery-field)
-[![License: MIT](https://badgen.now.sh/badge/license/MIT/green)](https://opensource.org/licenses/MIT)
+[![Stable Version](http://poser.pugx.org/ardenthq/nova-image-gallery-field/v)](https://packagist.org/packages/ardenthq/nova-image-gallery-field) [![License](http://poser.pugx.org/ardenthq/nova-image-gallery-field/license)](https://packagist.org/packages/ardenthq/nova-image-gallery-field) [![PHP Version Require](http://poser.pugx.org/ardenthq/nova-image-gallery-field/require/php)](https://packagist.org/packages/ardenthq/nova-image-gallery-field)
 
 ## Features
 
