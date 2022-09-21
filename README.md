@@ -1,6 +1,10 @@
 # Laravel Nova Image Gallery Field
 
-> Custom Field for Nova that allows you to upload multiple images and sort them
+<p align="center">
+    <img src="./banner.jpeg" />
+</p>
+
+> A custom Nova field that allows multiple image upload with sorting
 
 ## Use
 
@@ -49,7 +53,7 @@ $schedule->call(function () {
 
 6. Use the `rulesMessages()` method to define custom validation messages for the image rules.
 
-7. Use the `help()` method if you want  to place "help" text inside the Drag & Drop area.
+7. Use the `help()` method if you want to place "help" text inside the Drag & Drop area.
 
 ### Example
 
