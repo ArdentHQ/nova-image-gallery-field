@@ -55,3 +55,48 @@ jobs:
 
             - name: Run Tests
               run: composer test:coverage
+
+    build:
+        needs: [unit]
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+              with:
+                  ref: ${{ github.head_ref }}
+                  token: ${{ secrets.GH_TOKEN }}
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: "8.1"
+                  extensions: mbstring, dom, fileinfo, intl, gd, imagick, bcmath, soap, zip, sqlite, pcov
+                  coverage: pcov
+
+            - name: Cache dependencies
+              uses: actions/cache@v2
+              with:
+                  path: ~/.composer/cache/files
+                  key: dependencies-composer-${{ hashFiles('composer.json') }}
+
+            - name: Authenticate Nova
+              run: composer config http-basic.nova.laravel.com ${{ secrets.NOVA_USERNAME }} ${{ secrets.NOVA_LICENSE_KEY }}
+
+            - name: Install Composer dependencies
+              run: composer install --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader --ignore-platform-reqs
+
+            - name: Install Yarn dependencies
+              run: yarn --frozen-lockfile
+
+            - name: Install Laravel Nova yarn dependencies
+              run: yarn nova:install
+
+            - name: Generate production build
+              run: yarn run production
+
+            - uses: stefanzweifel/git-auto-commit-action@v4
+              with:
+                  commit_message: "chore: generate production build"
+                  branch: ${{ github.head_ref }}
