@@ -1,7 +1,7 @@
 <template>
     <DefaultField
         :field="field"
-        :show-help-text="showHelpText"
+        :show-help-text="false"
         full-width-content
     >
         <template #field>
