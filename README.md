@@ -75,7 +75,7 @@ $schedule->call(function () {
 
 3. Add the `ImageGalleryField` field to your Nova Resource.
 
-4. Consider that the images will be stored in a `Spatie\MediaLibrary\MediaCollections\Models\Media` collection according to the name passed as the first parameter on the field `make` method or the second parameter if set.
+4. Consider that the images will be stored in a `Spatie\MediaLibrary\MediaCollections\Models\Media` collection according to the name passed as the first parameter on the field `make` method or the second parameter if set. *(Dont forget to [register a media collection in your model](https://spatie.be/docs/laravel-medialibrary/working-with-media-collections/defining-media-collections))*
 
 5. Use the `rules()` method to define the rules used for every single image.
 
