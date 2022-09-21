@@ -6,6 +6,36 @@
 
 > A custom Nova field that allows multiple image upload with sorting
 
+[![Build Status](https://badgen.now.sh/github/status/ArdentHQ/nova-image-gallery-field/main)](https://github.com/ArdentHQ/nova-image-gallery-field/actions?query=branch%main)
+[![Codecov](https://badgen.now.sh/codecov/c/github/ArdentHQ/nova-image-gallery-field)](https://codecov.io/gh/ArdentHQ/nova-image-gallery-field)
+[![License: MIT](https://badgen.now.sh/badge/license/MIT/green)](https://opensource.org/licenses/MIT)
+
+## Features
+
+- For Laravel Nova ^4.0
+- Multiple image upload into a `spatie/laravel-medialibrary` collection.
+- Image sorting
+- Custom Image Validation
+- Drag & Drop
+- Dark Mode
+
+<p align="center">
+    <img src="./screenshot.png" />
+</p>
+
+## Installation
+
+```console
+composer require ardenthq/nova-image-gallery-field
+```
+
+### Requirements
+
+-   PHP ^8.0
+-   [Laravel](https://laravel.com/)
+-   [Laravel Nova ^4.0](https://nova.laravel.com/)
+-   [Laravel Media Library](https://spatie.be/docs/laravel-medialibrary)
+
 ## Use
 
 > **Note**
