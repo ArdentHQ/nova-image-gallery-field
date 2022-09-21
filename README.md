@@ -6,6 +6,34 @@
 
 > A custom Nova field that allows multiple image upload with sorting
 
+[![Stable Version](http://poser.pugx.org/ardenthq/nova-image-gallery-field/v)](https://packagist.org/packages/ardenthq/nova-image-gallery-field) [![License](http://poser.pugx.org/ardenthq/nova-image-gallery-field/license)](https://packagist.org/packages/ardenthq/nova-image-gallery-field) [![PHP Version Require](http://poser.pugx.org/ardenthq/nova-image-gallery-field/require/php)](https://packagist.org/packages/ardenthq/nova-image-gallery-field)
+
+## Features
+
+- For Laravel Nova ^4.0
+- Multiple image upload into a `spatie/laravel-medialibrary` collection.
+- Image sorting
+- Custom Image Validation
+- Drag & Drop
+- Dark Mode
+
+<p align="center">
+    <img src="./screenshot.png" />
+</p>
+
+## Installation
+
+```console
+composer require ardenthq/nova-image-gallery-field
+```
+
+### Requirements
+
+-   PHP ^8.0
+-   [Laravel](https://laravel.com/)
+-   [Laravel Nova ^4.0](https://nova.laravel.com/)
+-   [Laravel Media Library](https://spatie.be/docs/laravel-medialibrary)
+
 ## Use
 
 > **Note**
@@ -47,7 +75,7 @@ $schedule->call(function () {
 
 3. Add the `ImageGalleryField` field to your Nova Resource.
 
-4. Consider that the images will be stored in a `Spatie\MediaLibrary\MediaCollections\Models\Media` collection according to the name passed as the first parameter on the field `make` method or the second parameter if set.
+4. Consider that the images will be stored in a `Spatie\MediaLibrary\MediaCollections\Models\Media` collection according to the name passed as the first parameter on the field `make` method or the second parameter if set. *(Dont forget to [register a media collection in your model](https://spatie.be/docs/laravel-medialibrary/working-with-media-collections/defining-media-collections))*
 
 5. Use the `rules()` method to define the rules used for every single image.
 
