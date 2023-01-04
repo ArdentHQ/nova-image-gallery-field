@@ -1,6 +1,6 @@
 <template>
     <div class="image-gallery-field">
-        <div class="relative w-8 rounded overflow-hidden h-8">
+        <div v-if="count > 0" class="relative w-8 rounded overflow-hidden h-8">
             <img :src="thumbnail" class="object-cover w-full h-full" />
 
             <div
@@ -9,6 +9,7 @@
                 {{ count }}
             </div>
         </div>
+        <div v-else class="w-8 h-8 bg-gray-50 rounded"></div>
     </div>
 </template>
 
@@ -19,7 +20,7 @@ export default {
         count() {
             return this.field.value && this.field.value.length
                 ? this.field.value.length
-                : "-";
+                : 0;
         },
         thumbnail() {
             return this.field.value && this.field.value.length
