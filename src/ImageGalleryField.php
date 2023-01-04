@@ -24,7 +24,7 @@ class ImageGalleryField extends Trix
      */
     public $component = 'image-gallery-field';
 
-    public $showOnIndex = true;
+    public $showOnIndex = false;
 
     public array $imageRulesMessages = [];
 
@@ -124,6 +124,19 @@ class ImageGalleryField extends Trix
 
             Media::setNewOrder($imageOrder);
         });
+    }
+
+    /**
+     * Specify that the element should be visible on the index view.
+     *
+     * @param  (callable():bool)|bool  $callback
+     * @return $this
+     */
+    public function showOnIndex($callback = true)
+    {
+        $this->showOnIndex = $callback;
+
+        return $this;
     }
 
    /**

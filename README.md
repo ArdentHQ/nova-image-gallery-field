@@ -107,7 +107,10 @@ final class ResourceName extends Resource
                     'max'        => 'The image must be less than 5MB.',
                     'dimensions' => 'The image must be at least 150px wide and 150px tall.',
                 ])
-                ->help('Min size 150 x 150. Max filesize 5MB.'),
+                ->help('Min size 150 x 150. Max filesize 5MB.')
+                // Optional: add this method if you want to show the first image
+                // on the gallery on the index page
+                ->showOnIndex(),
                 // ...
         ];
     }
