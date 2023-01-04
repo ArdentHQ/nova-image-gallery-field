@@ -65,6 +65,16 @@ it('accepts custom single image rules messages', function () {
     ]);
 });
 
+it('shows on index', function () {
+    $field = new ImageGalleryField('content');
+
+    expect($field->showOnIndex)->toBeFalse();
+
+    $field->showOnIndex();
+
+    expect($field->showOnIndex)->toBeTrue();
+});
+
 it('returns an array with the media library info', function () {
     Storage::fake();
 
