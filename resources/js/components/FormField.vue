@@ -1,9 +1,5 @@
 <template>
-    <DefaultField
-        :field="field"
-        :show-help-text="false"
-        full-width-content
-    >
+    <DefaultField :field="field" :show-help-text="false" full-width-content>
         <template #field>
             <div class="image-gallery-field">
                 <div :class="{ dark: dark }">

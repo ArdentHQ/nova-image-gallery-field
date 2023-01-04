@@ -1,20 +1,31 @@
 <template>
-  <div class="relative inline-flex items-center m-1">
-    <img :src="thumbnail" class="w-16 h-16 object-cover object-center inline rounded-xl pr-1" />
-    <div class="bg-primary-500 text-white text-xs font-bold absolute inline-flex items-center justify-center w-5 h-5 rounded-full -top-2 -right-1">{{ count }}</div>
-  </div>
+    <div class="image-gallery-field">
+        <div class="relative w-8 rounded overflow-hidden h-8">
+            <img :src="thumbnail" class="object-cover w-full h-full" />
+
+            <div
+                class="bg-primary-500 text-white text-xs leading-none font-semibold absolute inline-flex items-center justify-center w-4 h-4 rounded-full right-0 bottom-0 m-1"
+            >
+                {{ count }}
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
 export default {
-  props: ['resourceName', 'field'],
-  computed: {
-    count() {
-      return (this.field.value && this.field.value.length)?this.field.value.length:'-';
+    props: ["resourceName", "field"],
+    computed: {
+        count() {
+            return this.field.value && this.field.value.length
+                ? this.field.value.length
+                : "-";
+        },
+        thumbnail() {
+            return this.field.value && this.field.value.length
+                ? this.field.value[0].url
+                : "";
+        },
     },
-    thumbnail() {
-      return (this.field.value && this.field.value.length)?this.field.value[0].url:'';
-    }
-  }
-}
+};
 </script>

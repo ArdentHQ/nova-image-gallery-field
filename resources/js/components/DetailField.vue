@@ -1,14 +1,15 @@
 <template>
     <PanelItem :index="index" :field="field">
         <template #value>
-            <div class="image-gallery-field" v-if="field.value && field.value.length">
+            <div
+                class="image-gallery-field"
+                v-if="field.value && field.value.length"
+            >
                 {{ current }}
                 <light-box :index="selected" :images="images" />
-                <ul
-                    class="flex flex-wrap image-list -mt-4"
-                >
+                <ul class="flex flex-wrap image-list -mt-4">
                     <FieldImage
-                        v-for="(image,index) in images"
+                        v-for="(image, index) in images"
                         :image="image"
                         :key="image.id"
                         readonly
@@ -16,7 +17,7 @@
                     />
                 </ul>
             </div>
-	    <div class="image-gallery-field" v-else>-</div>
+            <div class="image-gallery-field" v-else>-</div>
         </template>
     </PanelItem>
 </template>
@@ -33,18 +34,18 @@ export default {
     },
     data() {
         return {
-            selected: null
-        }
+            selected: null,
+        };
     },
     computed: {
         images() {
             return Array.from(this.field.value);
-        }
+        },
     },
     methods: {
         select(index) {
-            this.selected = index
-        }
-    }
+            this.selected = index;
+        },
+    },
 };
 </script>
