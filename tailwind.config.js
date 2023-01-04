@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-const novaTailwindConfig = require("../../laravel/nova/tailwind.config.js");
+const novaTailwindConfig = require("./vendor/laravel/nova/tailwind.config.js");
 
 module.exports = {
     ...novaTailwindConfig,
