@@ -24,7 +24,7 @@ class ImageGalleryField extends Trix
      */
     public $component = 'image-gallery-field';
 
-    public $showOnIndex = false;
+    public $showOnIndex = true;
 
     public array $imageRulesMessages = [];
 
