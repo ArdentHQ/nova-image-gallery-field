@@ -37,6 +37,7 @@
                 'border-transparent': !error,
                 'border-red-500': !!error,
                 'pointer-events-none opacity-50': busy,
+                'cursor-pointer': !busy,
             }"
         >
             <img

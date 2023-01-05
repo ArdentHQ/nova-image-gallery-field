@@ -126,6 +126,19 @@ class ImageGalleryField extends Trix
         });
     }
 
+    /**
+     * Specify that the element should be visible on the index view.
+     *
+     * @param  (callable():bool)|bool  $callback
+     * @return $this
+     */
+    public function showOnIndex($callback = true)
+    {
+        $this->showOnIndex = $callback;
+
+        return $this;
+    }
+
    /**
     * Resolve the given attribute from the given resource.
     *
