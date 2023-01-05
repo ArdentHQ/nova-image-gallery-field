@@ -10,12 +10,12 @@
 
 ## Features
 
-- For Laravel Nova ^4.0
-- Multiple image upload into a `spatie/laravel-medialibrary` collection.
-- Image sorting
-- Custom Image Validation
-- Drag & Drop
-- Dark Mode
+-   For Laravel Nova ^4.0
+-   Multiple image upload into a `spatie/laravel-medialibrary` collection.
+-   Image sorting
+-   Custom Image Validation
+-   Drag & Drop
+-   Dark Mode
 
 <p align="center">
     <img src="./screenshot.png" />
@@ -75,7 +75,7 @@ $schedule->call(function () {
 
 3. Add the `ImageGalleryField` field to your Nova Resource.
 
-4. Consider that the images will be stored in a `Spatie\MediaLibrary\MediaCollections\Models\Media` collection according to the name passed as the first parameter on the field `make` method or the second parameter if set. *(Dont forget to [register a media collection in your model](https://spatie.be/docs/laravel-medialibrary/working-with-media-collections/defining-media-collections))*
+4. Consider that the images will be stored in a `Spatie\MediaLibrary\MediaCollections\Models\Media` collection according to the name passed as the first parameter on the field `make` method or the second parameter if set. _(Dont forget to [register a media collection in your model](https://spatie.be/docs/laravel-medialibrary/working-with-media-collections/defining-media-collections))_
 
 5. Use the `rules()` method to define the rules used for every single image.
 
@@ -109,7 +109,7 @@ final class ResourceName extends Resource
                 ])
                 ->help('Min size 150 x 150. Max filesize 5MB.')
                 // Optional: add this method if you want to show the first image
-                // on the gallery on the index page
+                // of the gallery on the index page
                 ->showOnIndex(),
                 // ...
         ];
