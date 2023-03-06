@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Fields\Trix;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Trix\DeleteAttachments;
-use Laravel\Nova\Trix\DetachAttachment;
-use Laravel\Nova\Trix\DiscardPendingAttachments;
-use Laravel\Nova\Trix\PendingAttachment;
+use Laravel\Nova\Fields\Attachments\DeleteAttachments;
+use Laravel\Nova\Fields\Attachments\DetachAttachment;
+use Laravel\Nova\Fields\Attachments\DiscardPendingAttachments;
+use Laravel\Nova\Fields\Attachments\PendingAttachment;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ImageGalleryField extends Trix
