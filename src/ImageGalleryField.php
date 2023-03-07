@@ -7,12 +7,12 @@ namespace Ardenthq\ImageGalleryField;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use Laravel\Nova\Fields\Trix;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\Attachments\DeleteAttachments;
 use Laravel\Nova\Fields\Attachments\DetachAttachment;
 use Laravel\Nova\Fields\Attachments\DiscardPendingAttachments;
 use Laravel\Nova\Fields\Attachments\PendingAttachment;
+use Laravel\Nova\Fields\Trix;
+use Laravel\Nova\Http\Requests\NovaRequest;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ImageGalleryField extends Trix
