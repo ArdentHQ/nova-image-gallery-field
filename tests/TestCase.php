@@ -40,7 +40,7 @@ abstract class TestCase extends Orchestra
      */
     protected function setUpNovaAttachmentsTables($app)
     {
-        $app['db']->connection()->getSchemaBuilder()->create('nova_pending_trix_attachments', function (Blueprint $table) {
+        $app['db']->connection()->getSchemaBuilder()->create('nova_pending_field_attachments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('draft_id')->index();
             $table->string('attachment');
@@ -48,7 +48,7 @@ abstract class TestCase extends Orchestra
             $table->timestamps();
         });
 
-        $app['db']->connection()->getSchemaBuilder()->create('nova_trix_attachments', function (Blueprint $table) {
+        $app['db']->connection()->getSchemaBuilder()->create('nova_field_attachments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('attachable_type');
             $table->unsignedInteger('attachable_id');
