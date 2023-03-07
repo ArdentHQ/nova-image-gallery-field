@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
-use Laravel\Nova\Trix\PendingAttachment;
+use Laravel\Nova\Fields\Attachments\PendingAttachment;
 
 function createRequestWithFile(UploadedFile $file, array $parameters = [])
 {

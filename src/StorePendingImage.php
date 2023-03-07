@@ -9,7 +9,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Laravel\Nova\Trix\PendingAttachment;
+use Laravel\Nova\Fields\Attachments\PendingAttachment;
 
 class StorePendingImage
 {

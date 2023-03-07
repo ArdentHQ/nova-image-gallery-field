@@ -5,8 +5,8 @@ declare(strict_types=1);
 use Ardenthq\ImageGalleryField\ImageGalleryField;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Nova\Fields\Attachments\PendingAttachment;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Trix\PendingAttachment;
 use Tests\Fixtures\ExampleModel;
 
 function createNovaRequest(array $files = [], array $parameters = [])
