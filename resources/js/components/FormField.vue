@@ -193,7 +193,7 @@ export default {
 
                 try {
                     const response = await Nova.request().post(
-                        `/nova-api/${this.resourceName}/trix-attachment/${this.field.attribute}`,
+                        `/nova-api/${this.resourceName}/field-attachment/${this.field.attribute}`,
                         data
                     );
 
