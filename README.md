@@ -42,7 +42,7 @@ composer require ardenthq/nova-image-gallery-field
 1. Define two database tables to store pending and persisted Trix uploads. To do so, create a migration with the following table definitions:
 
 ```php
-Schema::create('nova_pending_trix_attachments', function (Blueprint $table) {
+Schema::create('nova_pending_field_attachments', function (Blueprint $table) {
     $table->increments('id');
     $table->string('draft_id')->index();
     $table->string('attachment');
@@ -50,7 +50,7 @@ Schema::create('nova_pending_trix_attachments', function (Blueprint $table) {
     $table->timestamps();
 });
 
-Schema::create('nova_trix_attachments', function (Blueprint $table) {
+Schema::create('nova_field_attachments', function (Blueprint $table) {
     $table->increments('id');
     $table->string('attachable_type');
     $table->unsignedInteger('attachable_id');
