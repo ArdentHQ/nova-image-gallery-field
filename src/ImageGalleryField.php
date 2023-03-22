@@ -90,7 +90,7 @@ class ImageGalleryField extends Trix
     }
 
     /**
-     * Set the thumbnail conversion method name
+     * Set the thumbnail conversion method name.
      *
      * @param string $conversion
      *
@@ -118,16 +118,16 @@ class ImageGalleryField extends Trix
             /** @var string[] $newImages */
             $newImages = $request->get($attribute);
             /** @var (mixed)[] $imagesToDelete */
-            $imagesToDelete = $request->get($attribute . '_delete', []);
+            $imagesToDelete = $request->get($attribute.'_delete', []);
             /** @var (mixed)[] $imageOrder */
-            $imageOrder = $request->get($attribute . '_order', []);
+            $imageOrder = $request->get($attribute.'_order', []);
 
             collect($newImages)->each(function ($tempImageId) use ($model, $attribute, &$imageOrder) {
-                $imageOrderIndex = array_search('new:' . $tempImageId, $imageOrder, true);
+                $imageOrderIndex = array_search('new:'.$tempImageId, $imageOrder, true);
 
                 $pendingAttachment = PendingAttachment::find($tempImageId);
 
-                $stream = Storage::disk($this->disk)->readStream($this->storagePath . $pendingAttachment->attachment);
+                $stream = Storage::disk($this->disk)->readStream($this->storagePath.$pendingAttachment->attachment);
 
                 $media = $model->addMediaFromStream($stream)->toMediaCollection($attribute);
 

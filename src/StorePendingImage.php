@@ -23,8 +23,7 @@ class StorePendingImage
          * The field instance.
          */
         public ImageGalleryField $field
-    )
-    {
+    ) {
     }
 
     /**
@@ -64,8 +63,8 @@ class StorePendingImage
 
         /** @var FilesystemAdapter $storage */
         $storage = Storage::disk($disk);
-        $url = $storage->url($attachment->attachment);
-        $mime = $storage->mimeType($attachment->attachment);
+        $url     = $storage->url($attachment->attachment);
+        $mime    = $storage->mimeType($attachment->attachment);
 
         $imageGenerator = ImageGeneratorFactory::forExtension(File::extension($attachment->attachment));
 
