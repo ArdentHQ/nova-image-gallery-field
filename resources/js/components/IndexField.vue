@@ -24,7 +24,7 @@ export default {
         },
         thumbnail() {
             return this.field.value && this.field.value.length
-                ? this.field.value[0].url
+                ? (this.field.value[0].thumb_url ? this.field.value[0].thumb_url : this.field.value[0].url)
                 : "";
         },
     },

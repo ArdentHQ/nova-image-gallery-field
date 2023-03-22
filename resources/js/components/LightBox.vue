@@ -32,9 +32,16 @@
             </div>
             <div class="lightbox-image" @click.stop="">
                 <img
+                    v-if="images[localIndex].type === 'image'"
                     :src="images[localIndex].url"
                     class="rounded-xl w-auto h-auto"
                 />
+                <video v-else controls autoplay playsinline class="rounded-xl w-auto h-[95vh]">
+                    <source
+                        :src="images[localIndex].url"
+                        :type="images[localIndex].mime_type"
+                    />
+                </video>
             </div>
             <div
                 class="cursor-pointer self-center px-8"
