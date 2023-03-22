@@ -11,7 +11,7 @@
 ## Features
 
 -   For Laravel Nova ^4.0
--   Multiple image upload into a `spatie/laravel-medialibrary` collection.
+-   Multiple image and video upload into a `spatie/laravel-medialibrary` collection.
 -   Image sorting
 -   Custom Image Validation
 -   Drag & Drop
@@ -82,6 +82,19 @@ $schedule->call(function () {
 6. Use the `rulesMessages()` method to define custom validation messages for the image rules.
 
 7. Use the `help()` method if you want to place "help" text inside the Drag & Drop area.
+
+8. Use the `thumbConversion()` to change the default conversion name for the image thumbnail.
+
+```php
+    // add this method to your model with InteractsWithMedia trait
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this
+            ->addMediaConversion('thumb') // thumbConversion customizes this 
+            ->fit(Manipulations::FIT_CROP, 300, 300)
+            ->nonQueued();
+    }
+```
 
 ### Example
 
