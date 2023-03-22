@@ -90,9 +90,12 @@ it('returns an array with the media library info', function () {
 
     $value = $images->map(function ($image, $index) {
         return [
-            'id'    => $image->id,
-            'url'   => $image->getUrl(),
-            'order' => $index,
+            'id'        => $image->id,
+            'url'       => $image->getUrl(),
+            'order'     => $index,
+            'type'      => 'image',
+            'mime_type' => 'image/png',
+            'thumb_url' => null,
         ];
     })->toArray();
 
@@ -121,11 +124,11 @@ it('stores the new images in the given order', function () {
     });
 
     // Ids of the pending attachments that need to be persisted
-    $newImagesIds = $newImages->pluck('id')->map(fn ($id) => (string) $id);
+    $newImagesIds = $newImages->pluck('id')->map(fn($id) => (string) $id);
 
     // The order for the new images contain a `new:` prefix
-    $imageOrderIds        = [$newImagesIds->get(1), $newImagesIds->get(0), $newImagesIds->get(2)];
-    $imageOrderWithPrefix = collect($imageOrderIds)->map(fn ($id) => "new:{$id}")->toArray();
+    $imageOrderIds = [$newImagesIds->get(1), $newImagesIds->get(0), $newImagesIds->get(2)];
+    $imageOrderWithPrefix = collect($imageOrderIds)->map(fn($id) => "new:{$id}")->toArray();
 
     $request = createNovaRequest(parameters: [
         'images'        => $newImagesIds->toArray(),
@@ -155,10 +158,10 @@ it('stores the previously added images in the given order', function () {
     });
 
     // Ids of the pending attachments that need to be persisted
-    $imagesId = $images->pluck('id')->map(fn ($id) => (string) $id);
+    $imagesId = $images->pluck('id')->map(fn($id) => (string) $id);
 
     // The order for the new images contain a `new:` prefix
-    $imageOrderIds        = [$imagesId->get(1), $imagesId->get(0), $imagesId->get(2)];
+    $imageOrderIds = [$imagesId->get(1), $imagesId->get(0), $imagesId->get(2)];
 
     $request = createNovaRequest(parameters: [
         'images'        => [],
@@ -188,7 +191,7 @@ it('deletes the given images to delete', function () {
     });
 
     // Ids of the pending attachments that need to be persisted
-    $imagesId = $images->pluck('id')->map(fn ($id) => (string) $id);
+    $imagesId = $images->pluck('id')->map(fn($id) => (string) $id);
 
     // The order for the new images contain a `new:` prefix
     $imagesToDeleteId = [$imagesId->get(2), $imagesId->get(0)];
