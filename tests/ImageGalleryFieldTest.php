@@ -90,9 +90,12 @@ it('returns an array with the media library info', function () {
 
     $value = $images->map(function ($image, $index) {
         return [
-            'id'    => $image->id,
-            'url'   => $image->getUrl(),
-            'order' => $index,
+            'id'        => $image->id,
+            'url'       => $image->getUrl(),
+            'order'     => $index,
+            'type'      => 'image',
+            'mime_type' => 'image/png',
+            'thumb_url' => null,
         ];
     })->toArray();
 
@@ -158,7 +161,7 @@ it('stores the previously added images in the given order', function () {
     $imagesId = $images->pluck('id')->map(fn ($id) => (string) $id);
 
     // The order for the new images contain a `new:` prefix
-    $imageOrderIds        = [$imagesId->get(1), $imagesId->get(0), $imagesId->get(2)];
+    $imageOrderIds = [$imagesId->get(1), $imagesId->get(0), $imagesId->get(2)];
 
     $request = createNovaRequest(parameters: [
         'images'        => [],

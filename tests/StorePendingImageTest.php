@@ -48,7 +48,7 @@ it('requires a draftId', function () {
     ]));
 })->throws(ValidationException::class, 'The draft id field is required.');
 
-it('stores the attachment and returns a json with the url and model id', function () {
+it('stores the attachment and returns a json with the url, thumb_url, type, mime_type and model id', function () {
     Storage::fake('public');
 
     $field = new ImageGalleryField('content');
@@ -73,5 +73,5 @@ it('stores the attachment and returns a json with the url and model id', functio
 
     expect($response)->toBeJson();
 
-    expect($response)->toContain(sprintf('{"url":"\/storage\/%s","id":%s}', $attachment->attachment, $attachment->id));
+    expect($response)->toContain(sprintf('{"type":"image","mime_type":"image\/png","url":"\/storage\/%s","thumb_url":null,"id":%s}', $attachment->attachment, $attachment->id));
 });

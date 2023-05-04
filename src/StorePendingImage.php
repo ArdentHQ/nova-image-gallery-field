@@ -8,8 +8,11 @@ use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Nova\Fields\Attachments\PendingAttachment;
+use Spatie\MediaLibrary\Conversions\ImageGenerators\ImageGeneratorFactory;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class StorePendingImage
 {
@@ -27,6 +30,7 @@ class StorePendingImage
      * Attach a pending attachment to the field.
      *
      * @param Request $request
+     *
      * @return string
      */
     public function __invoke(Request $request)
@@ -60,12 +64,22 @@ class StorePendingImage
         /** @var FilesystemAdapter $storage */
         $storage = Storage::disk($disk);
         $url     = $storage->url($attachment->attachment);
+        $mime    = $storage->mimeType($attachment->attachment);
+
+        $imageGenerator = ImageGeneratorFactory::forExtension(File::extension($attachment->attachment));
+
+        $type = $imageGenerator
+            ? $imageGenerator->getType()
+            : Media::TYPE_OTHER;
 
         // We need to return a string to make it compatible with the parent class
         /** @var string $result */
         $result = json_encode([
-            'url' => $url,
-            'id'  => $attachment->id,
+            'type'      => $type,
+            'mime_type' => $mime,
+            'url'       => $url,
+            'thumb_url' => null,
+            'id'        => $attachment->id,
         ]);
 
         return $result;

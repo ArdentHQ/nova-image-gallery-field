@@ -35,12 +35,15 @@ class ImageGalleryField extends Trix
      */
     public $imageRules = [];
 
+    public $thumbConversion = 'thumb';
+
     /**
      * Create a new field.
      *
-     * @param  string  $name
-     * @param  string|\Closure|callable|object|null  $attribute
-     * @param  (callable(mixed, mixed, ?string):mixed)|null  $resolveCallback
+     * @param string                                       $name
+     * @param string|\Closure|callable|object|null         $attribute
+     * @param (callable(mixed, mixed, ?string):mixed)|null $resolveCallback
+     *
      * @return void
      */
     public function __construct($name, $attribute = null, callable $resolveCallback = null)
@@ -52,19 +55,20 @@ class ImageGalleryField extends Trix
         $this->disk('public')->path('/');
 
         $this->attach(new StorePendingImage($this))
-             ->detach(new DetachAttachment())
-             ->delete(new DeleteAttachments($this))
-             ->discard(new DiscardPendingAttachments())
-             ->prunable();
+            ->detach(new DetachAttachment())
+            ->delete(new DeleteAttachments($this))
+            ->discard(new DiscardPendingAttachments())
+            ->prunable();
     }
 
     /**
      * Set custom error messages for the validation rules.
      *
-     * @param  array<string, string>  $messages
+     * @param array<string, string> $messages
+     *
      * @return $this
      */
-    public function rulesMessages(array $messages) : self
+    public function rulesMessages(array $messages): self
     {
         $this->imageRulesMessages = $messages;
 
@@ -75,6 +79,7 @@ class ImageGalleryField extends Trix
      * Set the validation rules for the field.
      *
      * @param callable|array<int, (string | \Illuminate\Validation\Rule | Rule | callable)>|string ...$rules
+     *
      * @return $this
      */
     public function rules($rules)
@@ -85,22 +90,37 @@ class ImageGalleryField extends Trix
     }
 
     /**
+     * Set the thumbnail conversion method name.
+     *
+     * @param string $conversion
+     *
+     * @return $this
+     */
+    public function thumbConversion(string $conversion): self
+    {
+        $this->thumbConversion = $conversion;
+
+        return $this;
+    }
+
+    /**
      * Hydrate the given attribute on the model based on the incoming request.
      *
-     * @param  Model  $model
-     * @param  string  $attribute
-     * @param  string|null  $requestAttribute
+     * @param Model       $model
+     * @param string      $attribute
+     * @param string|null $requestAttribute
+     *
      * @return mixed
      */
     public function fillInto(NovaRequest $request, $model, $attribute, $requestAttribute = null)
     {
         $model::saved(function ($model) use ($request, $attribute) {
             /** @var string[] $newImages */
-            $newImages      = $request->get($attribute);
+            $newImages = $request->get($attribute);
             /** @var (mixed)[] $imagesToDelete */
             $imagesToDelete = $request->get($attribute.'_delete', []);
             /** @var (mixed)[] $imageOrder */
-            $imageOrder     = $request->get($attribute.'_order', []);
+            $imageOrder = $request->get($attribute.'_order', []);
 
             collect($newImages)->each(function ($tempImageId) use ($model, $attribute, &$imageOrder) {
                 $imageOrderIndex = array_search('new:'.$tempImageId, $imageOrder, true);
@@ -129,7 +149,8 @@ class ImageGalleryField extends Trix
     /**
      * Specify that the element should be visible on the index view.
      *
-     * @param  (callable():bool)|bool  $callback
+     * @param (callable():bool)|bool $callback
+     *
      * @return $this
      */
     public function showOnIndex($callback = true)
@@ -139,21 +160,27 @@ class ImageGalleryField extends Trix
         return $this;
     }
 
-   /**
-    * Resolve the given attribute from the given resource.
-    *
-    * @param  mixed  $resource
-    * @param  string  $attribute
-    * @return mixed
-    */
-   protected function resolveAttribute($resource, $attribute)
-   {
-       return $resource->getMedia($attribute)->map(static function ($media, $index) {
-           return [
-               'id'    => $media->id,
-               'url'   => $media->getUrl(),
-               'order' => $index,
-           ];
-       });
-   }
+    /**
+     * Resolve the given attribute from the given resource.
+     *
+     * @param mixed  $resource
+     * @param string $attribute
+     *
+     * @return mixed
+     */
+    protected function resolveAttribute($resource, $attribute)
+    {
+        return $resource->getMedia($attribute)->map(function (Media $media, $index) {
+            return [
+                'id'        => $media->id,
+                'type'      => $media->getTypeFromExtension(),
+                'mime_type' => $media->mime_type,
+                'url'       => $media->getUrl(),
+                'thumb_url' => $media->hasGeneratedConversion($this->thumbConversion)
+                    ? $media->getUrl($this->thumbConversion)
+                    : null,
+                'order'     => $index,
+            ];
+        });
+    }
 }

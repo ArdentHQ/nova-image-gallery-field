@@ -47,10 +47,10 @@
                                 class="font-semibold text-gray-900 dark:text-gray-200"
                             >
                                 <span class="hidden md:inline"
-                                    >Drag &amp; Drop your files here or
+                                    >{{ __('Drag &amp; Drop your files here or ') }}
                                 </span>
                                 <span class="text-primary-500">
-                                    Browse Files
+                                    {{ __("Browse files") }}
                                 </span>
                             </div>
 
@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import { FormField, HandlesValidationErrors } from "laravel-nova";
+import { FormField, HandlesValidationErrors, Localization } from "laravel-nova";
 import FieldImage from "./FieldImage.vue";
 import uniqid from "uniqid";
 import Sortable from "sortablejs";
@@ -125,13 +125,19 @@ export default {
         FieldImage,
     },
 
-    mixins: [FormField, HandlesValidationErrors],
+    mixins: [FormField, HandlesValidationErrors, Localization],
+
+    data() {
+        return {
+            draftId: uuidv4(),
+            sortable: null,
+            busy: false,
+            dark: false,
+            documentMutationObserver: null,
+        };
+    },
 
     props: ["resourceName", "resourceId", "field"],
-
-    data: () => ({
-        draftId: uuidv4(),
-    }),
 
     methods: {
         setInitialValue() {
@@ -183,13 +189,15 @@ export default {
 
                 const fileId = uniqid();
 
-                this.value.push({
+                let value = {
                     id: fileId,
                     url: URL.createObjectURL(file),
+                    type: file.type.includes("image/") ? "image" : "video", // for default display
                     busy: true,
                     order: orderStart + index + 1,
                     new: true,
-                });
+                };
+                this.value.push(value);
 
                 try {
                     const response = await Nova.request().post(
@@ -199,13 +207,16 @@ export default {
 
                     // Its counterintuitive but `response.data.url` contains a
                     // JSON string with the url and the media id.
-                    const { url, id } = JSON.parse(response.data.url);
+                    const { url, id, thumb_url, type, mime_type } = JSON.parse(response.data.url);
 
                     const valueIndex = this.value.findIndex(
                         (v) => v.id === fileId
                     );
                     this.value.splice(valueIndex, 1, {
                         url,
+                        thumb_url,
+                        type,
+                        mime_type,
                         id,
                         order: this.value[valueIndex].order,
                         new: true,
@@ -301,15 +312,6 @@ export default {
         deletedImages() {
             return (this.value || []).filter((image) => image.delete);
         },
-    },
-
-    data() {
-        return {
-            sortable: null,
-            busy: false,
-            dark: false,
-            documentMutationObserver: null,
-        };
     },
 
     watch: {
