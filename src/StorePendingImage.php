@@ -46,7 +46,7 @@ class StorePendingImage
         /** @var string $originalFileName */
         $filePathinfo = pathinfo($file->getClientOriginalName());
         /** @var string $storageDir */
-        $storageDir = rtrim($this->field->getStorageDir(), '/') . '/pending-images';
+        $storageDir = rtrim($this->field->getStorageDir(), '/') . '/nova-pending-images';
         /** @var string $disk */
         $disk = $this->field->getStorageDisk();
         /** @var string $draftId */
