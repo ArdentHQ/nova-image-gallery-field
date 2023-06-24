@@ -46,6 +46,7 @@ Schema::create('nova_pending_field_attachments', function (Blueprint $table) {
     $table->increments('id');
     $table->string('draft_id')->index();
     $table->string('attachment');
+    $table->string('original_name');
     $table->string('disk');
     $table->timestamps();
 });

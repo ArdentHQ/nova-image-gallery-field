@@ -109,7 +109,11 @@ class ImageGalleryField extends Trix
 
                 $stream = Storage::disk($this->disk)->readStream($this->storagePath.$pendingAttachment->attachment);
 
-                $media = $model->addMediaFromStream($stream)->toMediaCollection($attribute);
+                $media = $model
+                    ->addMediaFromStream($stream)
+                    ->usingFileName($pendingAttachment->original_name)
+                    ->toMediaCollection($attribute);
+
 
                 $imageOrder[$imageOrderIndex] = $media->id;
             });
