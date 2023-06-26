@@ -67,11 +67,13 @@ it('stores the attachment and returns a json with the url and model id', functio
 
     $attachment = PendingAttachment::first();
 
-    expect($attachment->draft_id)->toBe('123');
-    expect($attachment->disk)->toBe('public');
-    expect($attachment->attachment)->toEndWith('.png');
+    expect($attachment->draft_id)->toBe('123')
+        ->and($attachment->disk)->toBe('public')
+        ->and($attachment->attachment)->toEndWith('.png')
+        ->and($attachment->original_name)->toBe($image->name)
+        ->and($response)->toBeJson()
+        ->and($response)->toContain(sprintf('{"url":"\/storage\/%s","id":%s}', str_replace('/', '\/', $attachment->attachment), $attachment->id));
 
-    expect($response)->toBeJson();
-
-    expect($response)->toContain(sprintf('{"url":"\/storage\/%s","id":%s}', $attachment->attachment, $attachment->id));
 });
+
+

@@ -64,6 +64,14 @@ Schema::create('nova_field_attachments', function (Blueprint $table) {
 });
 ```
 
+**Note**: latest nova already includes these migrations. If so, you might receive error `Table already exists` while running migrations. In this case, you might only need to add `original_name` field in `nova_pending_field_attachments`:
+
+```php
+Schema::table('nova_pending_field_attachments', function (Blueprint $table) {
+    $table->string('original_name')->after('attachment');
+});
+```
+
 2. In your `app/Console/Kernel.php` file, you should register a daily job to prune any stale attachments from the pending attachments table and storage. Laravel Nova provides the job implementation needed to accomplish this:
 
 ```php
