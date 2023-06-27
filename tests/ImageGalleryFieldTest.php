@@ -204,7 +204,7 @@ it('deletes the given images to delete', function () {
         ->and($model->getMedia('images')->first()->id)->toEqual($imagesId->get(1));
 });
 
-it('images are created and stored with correct names', function () {
+it('creates and stores images with correct name and path', function () {
     Storage::fake();
 
     $field = new ImageGalleryField('images');
