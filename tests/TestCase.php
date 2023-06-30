@@ -44,6 +44,7 @@ abstract class TestCase extends Orchestra
             $table->increments('id');
             $table->string('draft_id')->index();
             $table->string('attachment');
+            $table->string('original_name');
             $table->string('disk');
             $table->timestamps();
         });

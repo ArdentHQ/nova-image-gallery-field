@@ -9,6 +9,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Laravel\Nova\Fields\Attachments\PendingAttachment;
 
 class StorePendingImage
@@ -42,8 +43,10 @@ class StorePendingImage
 
         /** @var UploadedFile $file */
         $file = $request->file('attachment');
+        /** @var string $originalFileName */
+        $filePathinfo = pathinfo($file->getClientOriginalName());
         /** @var string $storageDir */
-        $storageDir = $this->field->getStorageDir();
+        $storageDir = rtrim($this->field->getStorageDir(), '/') . '/nova-pending-images';
         /** @var string $disk */
         $disk = $this->field->getStorageDisk();
         /** @var string $draftId */
@@ -52,9 +55,10 @@ class StorePendingImage
         $attachment = $file->store($storageDir, $disk);
 
         $attachment = PendingAttachment::create([
-            'draft_id'   => $draftId,
-            'attachment' => $attachment,
-            'disk'       => $disk,
+            'draft_id'      => $draftId,
+            'attachment'    => $attachment,
+            'disk'          => $disk,
+            'original_name' => Str::slug($filePathinfo['filename']) . "." . strtolower($filePathinfo['extension'])
         ]);
 
         /** @var FilesystemAdapter $storage */

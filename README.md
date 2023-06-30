@@ -46,6 +46,7 @@ Schema::create('nova_pending_field_attachments', function (Blueprint $table) {
     $table->increments('id');
     $table->string('draft_id')->index();
     $table->string('attachment');
+    $table->string('original_name');
     $table->string('disk');
     $table->timestamps();
 });
@@ -60,6 +61,14 @@ Schema::create('nova_field_attachments', function (Blueprint $table) {
     $table->timestamps();
 
     $table->index(['attachable_type', 'attachable_id']);
+});
+```
+
+**Note**: latest nova already includes these migrations. If so, you might receive error `Table already exists` while running migrations. In this case, you might only need to add `original_name` field in `nova_pending_field_attachments`:
+
+```php
+Schema::table('nova_pending_field_attachments', function (Blueprint $table) {
+    $table->string('original_name')->after('attachment');
 });
 ```
 

@@ -22,6 +22,6 @@ it('adds the scripts when nova is serving', function () {
 
     Event::dispatch(new ServingNova(request()));
 
-    expect(Nova::$scripts)->toHaveLength(1);
-    expect(Nova::$scripts[0]->name())->toBe('image-gallery-field');
+    expect(Nova::$scripts)->toHaveLength(1)
+        ->and(Nova::$scripts[0]->name())->toBe('image-gallery-field');
 });
