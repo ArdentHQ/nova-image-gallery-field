@@ -6,3 +6,4 @@
 .coverage
 coverage.xml
 auth.json
+.idea
