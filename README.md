@@ -8,6 +8,9 @@
 
 [![Stable Version](http://poser.pugx.org/ardenthq/nova-image-gallery-field/v)](https://packagist.org/packages/ardenthq/nova-image-gallery-field) [![License](http://poser.pugx.org/ardenthq/nova-image-gallery-field/license)](https://packagist.org/packages/ardenthq/nova-image-gallery-field) [![PHP Version Require](http://poser.pugx.org/ardenthq/nova-image-gallery-field/require/php)](https://packagist.org/packages/ardenthq/nova-image-gallery-field)
 
+> [!IMPORTANT]
+> This branch provides compatibility with Nova versions below 4.22.0 by adjusting the `Trix` component paths. If you make use of the latest Nova version, use the `main` branch instead!
+
 ## Features
 
 -   For Laravel Nova ^4.0
