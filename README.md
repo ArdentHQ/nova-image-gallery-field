@@ -31,7 +31,7 @@ composer require ardenthq/nova-image-gallery-field
 
 -   PHP ^8.0
 -   [Laravel](https://laravel.com/)
--   [Laravel Nova ^4.0](https://nova.laravel.com/)
+-   [Laravel Nova ^4.22](https://nova.laravel.com/), for lower versions see the [Compatibility Branch](#compatibility-branch)
 -   [Laravel Media Library](https://spatie.be/docs/laravel-medialibrary)
 
 ## Use
@@ -126,6 +126,10 @@ final class ResourceName extends Resource
     // ...
 }
 ```
+
+## Compatibility Branch
+
+Due to changes made to the `Trix` fields in Nova 4.22, this package does not support lower Nova v4 versions on the `main` branch. If you want to use this package on an older Nova version, please see the `nova-compatibility` branch in this repostitory and use that to install the package through composer: `composer require ardenthq/nova-image-gallery-field:dev-nova-compatibility`
 
 ## Development
 
