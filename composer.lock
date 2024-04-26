@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4248e05485888f77e9dca3ea4084e087",
+    "content-hash": "7c536c830264f788e1c95aa4ca5b776c",
     "packages": [
         {
             "name": "brick/math",
@@ -1540,20 +1540,20 @@
         },
         {
             "name": "laravel/nova",
-            "version": "4.33.3",
+            "version": "4.33.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "0f308ea895bb202cced2493722b40ec172e0c108"
+                "reference": "930edf8a6a04f45f3a85671ef276887c4ff45e5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-0f308ea895bb202cced2493722b40ec172e0c108-zip-e38c97.zip",
-                "reference": "0f308ea895bb202cced2493722b40ec172e0c108",
-                "shasum": "2ec5564e35e52cac368274b063880d9068a1e345"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-930edf8a6a04f45f3a85671ef276887c4ff45e5d-zip-a38dba.zip",
+                "reference": "930edf8a6a04f45f3a85671ef276887c4ff45e5d",
+                "shasum": "1086bb5c57ffed7defe061ea6f92bd8db4cb6d57"
             },
             "require": {
-                "brick/money": "^0.5|^0.6|^0.7|^0.8|^0.9",
+                "brick/money": "^0.5.0|^0.6.0|^0.7.0|^0.8.0",
                 "doctrine/dbal": "^2.13.3|^3.1.2|^4.0",
                 "ext-json": "*",
                 "illuminate/support": "^8.83.4|^9.3.1|^10.0|^11.0",
@@ -1660,9 +1660,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.33.3"
+                "source": "https://github.com/laravel/nova/tree/v4.33.0"
             },
-            "time": "2024-04-18T00:44:42+00:00"
+            "time": "2024-03-12T13:13:51+00:00"
         },
         {
             "name": "laravel/prompts",
