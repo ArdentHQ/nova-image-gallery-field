@@ -1,38 +1,38 @@
 name: Dependencies
 
 on:
-    schedule:
-        - cron: "0 0 * * 0"
-    workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 0"
+  workflow_dispatch:
 
 jobs:
-    update:
-        runs-on: ubuntu-latest
+  update:
+    runs-on: ubuntu-latest
 
-        steps:
-            - uses: actions/checkout@v3
-              with:
-                  ref: ${{ github.head_ref }}
-                  token: ${{ secrets.GH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GH_TOKEN }}
 
-            - name: Update dependencies
-              run: npx @faustbrian/node-composer-check-updates
+      - name: Update dependencies
+        run: npx @faustbrian/node-composer-check-updates
 
-            - name: Authenticate Nova
-              run: composer config http-basic.nova.laravel.com ${{ secrets.NOVA_USERNAME }} ${{ secrets.NOVA_LICENSE_KEY }}
+      - name: Authenticate Nova
+        run: composer config http-basic.nova.laravel.com ${{ secrets.NOVA_USERNAME }} ${{ secrets.NOVA_LICENSE_KEY }}
 
-            - name: Install dependencies
-              run: composer update --ignore-platform-reqs
+      - name: Install dependencies
+        run: composer update --ignore-platform-reqs
 
-            - name: Create Pull Request
-              id: cpr
-              uses: peter-evans/create-pull-request@v4
-              with:
-                  token: ${{ secrets.GH_TOKEN }}
-                  commit-message: "chore: update PHP dependencies"
-                  committer: GitHub <noreply@github.com>
-                  author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-                  branch: chore/update-php-dependencies
-                  delete-branch: true
-                  title: "chore: update PHP dependencies"
-                  draft: false
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          commit-message: "chore: update PHP dependencies"
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          branch: chore/update-php-dependencies
+          delete-branch: true
+          title: "chore: update PHP dependencies"
+          draft: false
