@@ -197,9 +197,7 @@ export default {
                         data
                     );
 
-                    // Its counterintuitive but `response.data.url` contains a
-                    // JSON string with the url and the media id.
-                    const { url, id } = JSON.parse(response.data.url);
+                    const { url, id } = JSON.parse(response.data);
 
                     const valueIndex = this.value.findIndex(
                         (v) => v.id === fileId
@@ -210,7 +208,9 @@ export default {
                         order: this.value[valueIndex].order,
                         new: true,
                     });
-                } catch ({ response }) {
+                } catch (data) {
+                    const { response } = data;
+
                     let error;
 
                     if (response.status === 422) {
