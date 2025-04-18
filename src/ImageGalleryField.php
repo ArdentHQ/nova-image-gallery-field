@@ -150,7 +150,7 @@ class ImageGalleryField extends Trix
     * @param  string  $attribute
     * @return mixed
     */
-   protected function resolveAttribute($resource, $attribute)
+   protected function resolveAttribute($resource, string $attribute): mixed
    {
        return $resource->getMedia($attribute)->map(static function ($media, $index) {
            return [
